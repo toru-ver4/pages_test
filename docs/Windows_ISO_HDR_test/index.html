@@ -5,11 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Widnows ISO HDR Test</title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: white;
+            color: black;
+            margin: 0;
+            padding: 20px;
+        }
         .container {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-top: 50px;
+        }
+        .container_2 {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
         }
         .rectangle {
             display: flex;
@@ -20,6 +32,16 @@
         .rectangle span {
             margin-top: 5px;
             font-size: 18px; /* フォントサイズを調整します */
+        }
+        table {
+            width: 80%; /* テーブルの幅を調整 */
+            margin: 20px auto; /* 上下のマージンと自動的に左右のマージンを設定して中央寄せ */
+            border-collapse: collapse; /* セルの境界線を一つにまとめる */
+        }
+        th, td {
+            border: 1px solid #ddd; /* セルの境界線のスタイル */
+            padding: 8px; /* セル内のパディング */
+            text-align: center; /* テキストの中央揃え */
         }
     </style>
 </head>
@@ -84,5 +106,18 @@
             <span>320 nits</span>
         </div>
     </div>
+
+    <table>
+        <tr>
+            <th>AVIF形式の画像</th>
+            <td><img width="960" src="./img/HDR_TP_3840x960.avif" alt="AVIF画像"></td>
+        </tr>
+        <tr>
+            <th>YouTube動画</th>
+            <td><iframe width="960" height="240" src="https://www.youtube.com/embed/VwSvia7yBNo?loop=1&playlist=VwSvia7yBNo&si=KPQKWnbrLO5nzoJG" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
+
