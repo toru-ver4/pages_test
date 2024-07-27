@@ -22,20 +22,26 @@
         }
         .patch_container p {
             margin-top: 5px;
-            margin-bottom: 5px;
+            margin-bottom: 15px;
             margin-left: 5px;
             margin-right: 5px;
+        }
+        .color-patch {
+            width: 64px;
+            height: 64px;
+            margin: 0px;
+            border: 0px solid black;
+        }
+        .color-caption {
+            margin-top: 5px;
+            font-size: 14px;
+            text-align: center;
         }
         .image-row {
             display: flex;
             justify-content: center;
             align-items: center;
             flex-wrap: wrap;
-        }
-        .container_2 {
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
         }
         .rectangle {
             display: flex;
@@ -61,7 +67,25 @@
 </head>
 <body>
     <div class="patch_container">
-        <p>MaxCLL and MaxPALL are calculated from the image files.</p>
+        <p>SDR Patch</p>
+        <div class="image-row">
+            <div class="rectangle"><div class="color-patch" style="background-color: #000000;"></div><div class="color-caption">#000000</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #2A2A2A;"></div><div class="color-caption">#2A2A2A</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #555555;"></div><div class="color-caption">#555555</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #808080;"></div><div class="color-caption">#808080</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #AAAAAA;"></div><div class="color-caption">#AAAAAA</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #D4D4D4;"></div><div class="color-caption">#D4D4D4</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #FFFFFF;"></div><div class="color-caption">#FFFFFF</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #ff0000;"></div><div class="color-caption">#FF0000</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #00ff00;"></div><div class="color-caption">#00FF00</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #0000ff;"></div><div class="color-caption">#0000FF</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #ff00ff;"></div><div class="color-caption">#FF00FF</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #00ffff;"></div><div class="color-caption">#00FFFF</div></div>
+            <div class="rectangle"><div class="color-patch" style="background-color: #ffff00;"></div><div class="color-caption">#FFFF00</div></div>
+        </div>
+    </div>
+    <div class="patch_container">
+        <p>AVIF HDR Patch (MaxCLL and MaxPALL are calculated from the image files)</p>
         <div class="image-row">
             <div class="rectangle"><img src="./img/patch_00080-nits_64px_cll-auto.avif" alt="80"><span>80 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00100-nits_64px_cll-auto.avif" alt="100"><span>100 nits</span></div>
@@ -69,7 +93,6 @@
             <div class="rectangle"><img src="./img/patch_00140-nits_64px_cll-auto.avif" alt="140"><span>140 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00160-nits_64px_cll-auto.avif" alt="160"><span>160 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00180-nits_64px_cll-auto.avif" alt="180"><span>180 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00200-nits_64px_cll-auto.avif" alt="200"><span>200 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00203-nits_64px_cll-auto.avif" alt="203"><span>203 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00204-nits_64px_cll-auto.avif" alt="204"><span>204 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00220-nits_64px_cll-auto.avif" alt="220"><span>220 nits</span></div>
@@ -80,26 +103,7 @@
         </div>
     </div>
     <div class="patch_container">
-        <p>MaxCLL and MaxPALL are fixed at 1000 nits.</p>
-        <div class="image-row">
-            <div class="rectangle"><img src="./img/patch_00080-nits_64px_cll-1000-1000-nits.avif" alt="80"><span>80 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00100-nits_64px_cll-1000-1000-nits.avif" alt="100"><span>100 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00120-nits_64px_cll-1000-1000-nits.avif" alt="120"><span>120 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00140-nits_64px_cll-1000-1000-nits.avif" alt="140"><span>140 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00160-nits_64px_cll-1000-1000-nits.avif" alt="160"><span>160 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00180-nits_64px_cll-1000-1000-nits.avif" alt="180"><span>180 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00200-nits_64px_cll-1000-1000-nits.avif" alt="200"><span>200 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00203-nits_64px_cll-1000-1000-nits.avif" alt="203"><span>203 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00204-nits_64px_cll-1000-1000-nits.avif" alt="204"><span>204 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00220-nits_64px_cll-1000-1000-nits.avif" alt="220"><span>220 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00240-nits_64px_cll-1000-1000-nits.avif" alt="240"><span>240 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00260-nits_64px_cll-1000-1000-nits.avif" alt="260"><span>260 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00280-nits_64px_cll-1000-1000-nits.avif" alt="280"><span>280 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00300-nits_64px_cll-1000-1000-nits.avif" alt="300"><span>300 nits</span></div>
-        </div>
-    </div>
-    <div class="patch_container">
-        <p>MaxCLL and MaxPALL are fixed at 10000 nits.</p>
+        <p>AVIF HDR Patch (MaxCLL and MaxPALL are fixed at 10000 nits)</p>
         <div class="image-row">
             <div class="rectangle"><img src="./img/patch_00080-nits_64px_cll-10000-10000-nits.avif" alt="80"><span>80 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00100-nits_64px_cll-10000-10000-nits.avif" alt="100"><span>100 nits</span></div>
@@ -107,7 +111,6 @@
             <div class="rectangle"><img src="./img/patch_00140-nits_64px_cll-10000-10000-nits.avif" alt="140"><span>140 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00160-nits_64px_cll-10000-10000-nits.avif" alt="160"><span>160 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00180-nits_64px_cll-10000-10000-nits.avif" alt="180"><span>180 nits</span></div>
-            <div class="rectangle"><img src="./img/patch_00200-nits_64px_cll-10000-10000-nits.avif" alt="200"><span>200 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00203-nits_64px_cll-10000-10000-nits.avif" alt="203"><span>203 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00204-nits_64px_cll-10000-10000-nits.avif" alt="204"><span>204 nits</span></div>
             <div class="rectangle"><img src="./img/patch_00220-nits_64px_cll-10000-10000-nits.avif" alt="220"><span>220 nits</span></div>
@@ -117,6 +120,7 @@
             <div class="rectangle"><img src="./img/patch_00300-nits_64px_cll-10000-10000-nits.avif" alt="300"><span>300 nits</span></div>
         </div>
     </div>
+
     <table>
         <tr>
             <th>AVIF</th>
