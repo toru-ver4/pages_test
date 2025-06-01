@@ -1,0 +1,28 @@
+以下の要件をすべて満たす単一の HTML を出力してください。余計な説明は不要で、コードのみ示してください。
+
+・目的：GitHub Pages 用の検証用ギャラリーで、3種類の元画像 (type1, type2, type3) に対して、パラメータ headroom を 0.0 から 5.0 まで 0.5 刻みで変化させた合計 33 枚の画像を表示する。  
+・画像の命名規則：  
+  - type1_sdr_with_gain_map_headroom-0.0.avif ～ type1_sdr_with_gain_map_headroom-5.0.avif  
+  - type2_sdr_with_gain_map_headroom-0.0.avif ～ type2_sdr_with_gain_map_headroom-5.0.avif  
+  - type3_sdr_with_gain_map_headroom-0.0.avif ～ type3_sdr_with_gain_map_headroom-5.0.avif  
+
+・HTML 構成：  
+  1. `<head>` 内にインライン CSS を記載し、外部 CSS ファイルは一切読み込まない。  
+  2. `<table>` で画像一覧を表示し、1列目に「Param」、2～4列目にそれぞれタイプ1～3の画像を並べる。  
+  3. `<colgroup>` を使い、1列目 (Param) を幅 5%、各画像列 (Type1, Type2, Type3) をそれぞれ幅 31.6667% に固定する。  
+  4. テーブルには table-layout: fixed; と border-collapse: collapse; を指定し、CSS 上も余白やボーダーをすべてリセットする。  
+  5. 各 `<tr>` は改行を入れずに 1 行で記述する。  
+  6. 「Param」セル内の数値は必ず水平・垂直とも中央寄せにし、背景色 #eeeeee、フォントサイズ 0.9rem、太字、上下パディング 8px とする。  
+  7. 画像セル (`<td class="img-cell">`) は box-sizing: border-box; padding: 4px; を指定し、画像 (`<img>`) には display: block; width: 100%; height: auto; cursor: pointer; を指定する。  
+  8. 画像をクリックすると拡大表示するモーダルを `<dialog>` 要素で実現し、クリック時に URL フラグメントが `#dlg-typeX-Y.Y` になるように `<a href="#dlg-…">` とする。  
+  9. `<dialog>` には以下を配置する：  
+     - 爆張クリックで閉じるための全画面カバーリンク `<a href="#" class="dialog-backdrop"></a>`  
+     - 右上に閉じるボタン `<a href="#" class="close-btn">×</a>`  
+     - 中央に拡大画像 `<img src="…" alt="…">`  
+     - `<dialog>` 自体はデフォルト display: none;、`:target` で flex 表示し、背景色は rgba(0,0,0,0.8) とする。拡大画像には max-width: 90vw; max-height: 90vh; を指定。  
+
+・レスポンシブ：  
+  - 画面幅が 600px 以下のときは `table, tr, th, td { display: block; width: 100%; }` に切り替え、`<th>` ヘッダー行は非表示にする。各 `<tr>` は下部ボーダー 1px solid #cccccc、下マージン 16px。`<td.param-cell>` は背景色 #dddddd。`<td.img-cell>` には幅 100%、上マージン 8px、box-sizing: border-box; padding: 4px;。  
+
+上記をすべて盛り込んだ HTML を、DOCTYPE 宣言から `<html>…</html>` まで一式で出力してください。
+

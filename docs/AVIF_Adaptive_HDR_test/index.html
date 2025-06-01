@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>検証用画像ギャラリー（余白追加版）</title>
+  <style>
+    /* Reset & 全画面幅テーブル固定レイアウト */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+    }
+    table {
+      width: 100%;
+      table-layout: fixed;      /* <colgroup> による列幅指定を優先 */
+      border-collapse: collapse; /* セル隙間をなくす */
+    }
+    th, td {
+      padding: 0;
+      border: none;
+      margin: 0;
+    }
+    th {
+      background-color: #dddddd;
+      text-align: center;
+      font-weight: bold;
+      padding: 8px 0;
+      font-size: 1rem;
+    }
+
+    /* <colgroup> による列幅指定 */
+    colgroup col:first-child {
+      width: 5%;   /* Param 列を全体幅の 5% に固定 */
+    }
+    colgroup col:nth-child(2),
+    colgroup col:nth-child(3),
+    colgroup col:nth-child(4) {
+      width: 31.6667%; /* 残り 95% を 3 等分 */
+    }
+
+    /* ↓ 変更箇所：Paramセルを中央寄せに強制適用 ↓ */
+    table td.param-cell {
+      text-align: center !important;  /* 水平中央揃えを最優先で適用 */
+      vertical-align: middle !important;/* 縦方向の中央揃え（必要であれば） */
+      background-color: #ffffff;
+      font-size: 0.9rem;
+      font-weight: bold;
+      padding: 8px 0;
+      box-sizing: border-box;
+    }
+
+    /* 画像セルまわり。余白も適宜付与 */
+    td.img-cell {
+      position: relative;
+      box-sizing: border-box;
+      padding: 4px;    /* 画像周囲の余白を確保 */
+    }
+    td.img-cell img {
+      display: block;
+      width: 100%;
+      height: auto;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+    /* モーダル（dialog）関係（変更なし） */
+    dialog {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      padding: 0;
+      border: none;
+      margin: 0;
+      z-index: 1000;
+    }
+    dialog:target {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .dialog-backdrop {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+    }
+    dialog img {
+      max-width: 90vw;
+      max-height: 90vh;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 2;
+    }
+    .close-btn {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      text-decoration: none;
+      font-size: 2rem;
+      color: #ffffff;
+      background: transparent;
+      z-index: 3;
+    }
+    .close-btn:hover {
+      color: #ffdddd;
+    }
+
+    /* レスポンシブ調整（600px以下） */
+    @media screen and (max-width: 600px) {
+      table, tr, th, td {
+        display: block;
+        width: 100%;
+      }
+      tr {
+        margin-bottom: 16px;
+        border-bottom: 1px solid #cccccc;
+      }
+      th {
+        display: none;
+      }
+      td.param-cell {
+        background-color: #dddddd;
+      }
+      td.img-cell {
+        width: 100%;
+        margin-top: 8px;
+        box-sizing: border-box;
+        padding: 4px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <table>
+    <colgroup>
+      <col style="width: 5%;" />
+      <col style="width: 31.6667%;" />
+      <col style="width: 31.6667%;" />
+      <col style="width: 31.6667%;" />
+    </colgroup>
+    <tr><th>Param</th><th>Type1</th><th>Type2</th><th>Type3</th></tr>
+    <tr><td class="param-cell">0.0</td><td class="img-cell"><a href="#dlg-type1-0.0"><img src="./img/type1_sdr_with_gain_map_headroom-0.0.avif" alt="type1 0.0"></a></td><td class="img-cell"><a href="#dlg-type2-0.0"><img src="./img/type2_sdr_with_gain_map_headroom-0.0.avif" alt="type2 0.0"></a></td><td class="img-cell"><a href="#dlg-type3-0.0"><img src="./img/type3_sdr_with_gain_map_headroom-0.0.avif" alt="type3 0.0"></a></td></tr>
+    <!-- 以下、0.5～5.0 も同様 -->
+    <tr><td class="param-cell">0.5</td><td class="img-cell"><a href="#dlg-type1-0.5"><img src="./img/type1_sdr_with_gain_map_headroom-0.5.avif" alt="type1 0.5"></a></td><td class="img-cell"><a href="#dlg-type2-0.5"><img src="./img/type2_sdr_with_gain_map_headroom-0.5.avif" alt="type2 0.5"></a></td><td class="img-cell"><a href="#dlg-type3-0.5"><img src="./img/type3_sdr_with_gain_map_headroom-0.5.avif" alt="type3 0.5"></a></td></tr>
+    <tr><td class="param-cell">1.0</td><td class="img-cell"><a href="#dlg-type1-1.0"><img src="./img/type1_sdr_with_gain_map_headroom-1.0.avif" alt="type1 1.0"></a></td><td class="img-cell"><a href="#dlg-type2-1.0"><img src="./img/type2_sdr_with_gain_map_headroom-1.0.avif" alt="type2 1.0"></a></td><td class="img-cell"><a href="#dlg-type3-1.0"><img src="./img/type3_sdr_with_gain_map_headroom-1.0.avif" alt="type3 1.0"></a></td></tr>
+    <tr><td class="param-cell">1.5</td><td class="img-cell"><a href="#dlg-type1-1.5"><img src="./img/type1_sdr_with_gain_map_headroom-1.5.avif" alt="type1 1.5"></a></td><td class="img-cell"><a href="#dlg-type2-1.5"><img src="./img/type2_sdr_with_gain_map_headroom-1.5.avif" alt="type2 1.5"></a></td><td class="img-cell"><a href="#dlg-type3-1.5"><img src="./img/type3_sdr_with_gain_map_headroom-1.5.avif" alt="type3 1.5"></a></td></tr>
+    <tr><td class="param-cell">2.0</td><td class="img-cell"><a href="#dlg-type1-2.0"><img src="./img/type1_sdr_with_gain_map_headroom-2.0.avif" alt="type1 2.0"></a></td><td class="img-cell"><a href="#dlg-type2-2.0"><img src="./img/type2_sdr_with_gain_map_headroom-2.0.avif" alt="type2 2.0"></a></td><td class="img-cell"><a href="#dlg-type3-2.0"><img src="./img/type3_sdr_with_gain_map_headroom-2.0.avif" alt="type3 2.0"></a></td></tr>
+    <tr><td class="param-cell">2.5</td><td class="img-cell"><a href="#dlg-type1-2.5"><img src="./img/type1_sdr_with_gain_map_headroom-2.5.avif" alt="type1 2.5"></a></td><td class="img-cell"><a href="#dlg-type2-2.5"><img src="./img/type2_sdr_with_gain_map_headroom-2.5.avif" alt="type2 2.5"></a></td><td class="img-cell"><a href="#dlg-type3-2.5"><img src="./img/type3_sdr_with_gain_map_headroom-2.5.avif" alt="type3 2.5"></a></td></tr>
+    <tr><td class="param-cell">3.0</td><td class="img-cell"><a href="#dlg-type1-3.0"><img src="./img/type1_sdr_with_gain_map_headroom-3.0.avif" alt="type1 3.0"></a></td><td class="img-cell"><a href="#dlg-type2-3.0"><img src="./img/type2_sdr_with_gain_map_headroom-3.0.avif" alt="type2 3.0"></a></td><td class="img-cell"><a href="#dlg-type3-3.0"><img src="./img/type3_sdr_with_gain_map_headroom-3.0.avif" alt="type3 3.0"></a></td></tr>
+    <tr><td class="param-cell">3.5</td><td class="img-cell"><a href="#dlg-type1-3.5"><img src="./img/type1_sdr_with_gain_map_headroom-3.5.avif" alt="type1 3.5"></a></td><td class="img-cell"><a href="#dlg-type2-3.5"><img src="./img/type2_sdr_with_gain_map_headroom-3.5.avif" alt="type2 3.5"></a></td><td class="img-cell"><a href="#dlg-type3-3.5"><img src="./img/type3_sdr_with_gain_map_headroom-3.5.avif" alt="type3 3.5"></a></td></tr>
+    <tr><td class="param-cell">4.0</td><td class="img-cell"><a href="#dlg-type1-4.0"><img src="./img/type1_sdr_with_gain_map_headroom-4.0.avif" alt="type1 4.0"></a></td><td class="img-cell"><a href="#dlg-type2-4.0"><img src="./img/type2_sdr_with_gain_map_headroom-4.0.avif" alt="type2 4.0"></a></td><td class="img-cell"><a href="#dlg-type3-4.0"><img src="./img/type3_sdr_with_gain_map_headroom-4.0.avif" alt="type3 4.0"></a></td></tr>
+    <tr><td class="param-cell">4.5</td><td class="img-cell"><a href="#dlg-type1-4.5"><img src="./img/type1_sdr_with_gain_map_headroom-4.5.avif" alt="type1 4.5"></a></td><td class="img-cell"><a href="#dlg-type2-4.5"><img src="./img/type2_sdr_with_gain_map_headroom-4.5.avif" alt="type2 4.5"></a></td><td class="img-cell"><a href="#dlg-type3-4.5"><img src="./img/type3_sdr_with_gain_map_headroom-4.5.avif" alt="type3 4.5"></a></td></tr>
+    <tr><td class="param-cell">5.0</td><td class="img-cell"><a href="#dlg-type1-5.0"><img src="./img/type1_sdr_with_gain_map_headroom-5.0.avif" alt="type1 5.0"></a></td><td class="img-cell"><a href="#dlg-type2-5.0"><img src="./img/type2_sdr_with_gain_map_headroom-5.0.avif" alt="type2 5.0"></a></td><td class="img-cell"><a href="#dlg-type3-5.0"><img src="./img/type3_sdr_with_gain_map_headroom-5.0.avif" alt="type3 5.0"></a></td></tr>
+  </table>
+
+  <!-- dialog 要素群は省略（従来のまま） -->
+  <!-- dialog 要素群。クリック時に #dlg-… フラグメントへ遷移し、:target で表示制御 -->
+  <!-- 各 dialog の中に、背景クリック用の <a class="dialog-backdrop"> と、右上 “×” の <a class="close-btn"> を配置 -->
+
+  <!-- TYPE1 -->
+  <dialog id="dlg-type1-0.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type1_sdr_with_gain_map_headroom-0.0.avif" alt="type1 0.0"></dialog>
+  <dialog id="dlg-type1-0.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type1_sdr_with_gain_map_headroom-0.5.avif" alt="type1 0.5"></dialog>
+  <dialog id="dlg-type1-1.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type1_sdr_with_gain_map_headroom-1.0.avif" alt="type1 1.0"></dialog>
+  <dialog id="dlg-type1-1.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type1_sdr_with_gain_map_headroom-1.5.avif" alt="type1 1.5"></dialog>
+  <dialog id="dlg-type1-2.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type1_sdr_with_gain_map_headroom-2.0.avif" alt="type1 2.0"></dialog>
+  <dialog id="dlg-type1-2.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type1_sdr_with_gain_map_headroom-2.5.avif" alt="type1 2.5"></a></dialog>
+  <dialog id="dlg-type1-3.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type1_sdr_with_gain_map_headroom-3.0.avif" alt="type1 3.0"></dialog>
+  <dialog id="dlg-type1-3.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type1_sdr_with_gain_map_headroom-3.5.avif" alt="type1 3.5"></dialog>
+  <dialog id="dlg-type1-4.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type1_sdr_with_gain_map_headroom-4.0.avif" alt="type1 4.0"></dialog>
+  <dialog id="dlg-type1-4.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type1_sdr_with_gain_map_headroom-4.5.avif" alt="type1 4.5"></dialog>
+  <dialog id="dlg-type1-5.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type1_sdr_with_gain_map_headroom-5.0.avif" alt="type1 5.0"></dialog>
+
+  <!-- TYPE2 -->
+  <dialog id="dlg-type2-0.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type2_sdr_with_gain_map_headroom-0.0.avif" alt="type2 0.0"></dialog>
+  <dialog id="dlg-type2-0.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type2_sdr_with_gain_map_headroom-0.5.avif" alt="type2 0.5"></dialog>
+  <dialog id="dlg-type2-1.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type2_sdr_with_gain_map_headroom-1.0.avif" alt="type2 1.0"></dialog>
+  <dialog id="dlg-type2-1.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type2_sdr_with_gain_map_headroom-1.5.avif" alt="type2 1.5"></dialog>
+  <dialog id="dlg-type2-2.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type2_sdr_with_gain_map_headroom-2.0.avif" alt="type2 2.0"></dialog>
+  <dialog id="dlg-type2-2.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type2_sdr_with_gain_map_headroom-2.5.avif" alt="type2 2.5"></dialog>
+  <dialog id="dlg-type2-3.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type2_sdr_with_gain_map_headroom-3.0.avif" alt="type2 3.0"></dialog>
+  <dialog id="dlg-type2-3.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type2_sdr_with_gain_map_headroom-3.5.avif" alt="type2 3.5"></dialog>
+  <dialog id="dlg-type2-4.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type2_sdr_with_gain_map_headroom-4.0.avif" alt="type2 4.0"></dialog>
+  <dialog id="dlg-type2-4.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type2_sdr_with_gain_map_headroom-4.5.avif" alt="type2 4.5"></dialog>
+  <dialog id="dlg-type2-5.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type2_sdr_with_gain_map_headroom-5.0.avif" alt="type2 5.0"></dialog>
+
+  <!-- TYPE3 -->
+  <dialog id="dlg-type3-0.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type3_sdr_with_gain_map_headroom-0.0.avif" alt="type3 0.0"></dialog>
+  <dialog id="dlg-type3-0.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type3_sdr_with_gain_map_headroom-0.5.avif" alt="type3 0.5"></dialog>
+  <dialog id="dlg-type3-1.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type3_sdr_with_gain_map_headroom-1.0.avif" alt="type3 1.0"></dialog>
+  <dialog id="dlg-type3-1.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type3_sdr_with_gain_map_headroom-1.5.avif" alt="type3 1.5"></dialog>
+  <dialog id="dlg-type3-2.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type3_sdr_with_gain_map_headroom-2.0.avif" alt="type3 2.0"></dialog>
+  <dialog id="dlg-type3-2.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type3_sdr_with_gain_map_headroom-2.5.avif" alt="type3 2.5"></dialog>
+  <dialog id="dlg-type3-3.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type3_sdr_with_gain_map_headroom-3.0.avif" alt="type3 3.0"></dialog>
+  <dialog id="dlg-type3-3.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type3_sdr_with_gain_map_headroom-3.5.avif" alt="type3 3.5"></dialog>
+  <dialog id="dlg-type3-4.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type3_sdr_with_gain_map_headroom-4.0.avif" alt="type3 4.0"></dialog>
+  <dialog id="dlg-type3-4.5"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type3_sdr_with_gain_map_headroom-4.5.avif" alt="type3 4.5"></dialog>
+  <dialog id="dlg-type3-5.0"><a href="#" class="dialog-backdrop"></a><a href="#" class="close-btn">&times;</a><img src="./img/type3_sdr_with_gain_map_headroom-5.0.avif" alt="type3 5.0"></dialog>
+
+</body>
+</html>
