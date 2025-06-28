@@ -9,36 +9,38 @@
       margin: 0;
       padding: 16px;
       font-family: sans-serif;
-      background-color: #f5f5f5;
+      background-color: #ffffff;
     }
     h1 {
       text-align: center;
       margin-bottom: 24px;
     }
-    .gallery {
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      align-items: center;
-    }
-    .gallery-item {
-      background: #fff;
-      border-radius: 8px;
-      padding: 8px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #ffffff;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 12px;
+      border: 1px solid #ddd;
+      vertical-align: middle;
       text-align: center;
-      width: fit-content;
     }
-    .gallery-item img {
-      display: block;
-      margin: 0 auto;
-      /* 原寸表示のため max-width は指定しない */
+    th {
+      background-color: #ffffff;
+      font-weight: bold;
     }
-    .caption {
-      margin-top: 8px;
+    td.param {
+      width: 10%;
       font-size: 0.9rem;
       color: #333;
-      word-break: break-all;
+    }
+    td.image img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+      margin: 0 auto;
     }
   </style>
 </head>
@@ -46,64 +48,106 @@
 
   <h1>HDR Capacity Test</h1>
 
-  SDR に存在する、色の付いた矩形が見えてしまった場合、HDR Capacity が不足していて SDR成分が合成されてしまっている。<br>
-
-  逆に言うと色の付いた矩形が見えない場合は HDR Capacity が十分にあり HDR成分のみが表示されている。
-
-  <div class="gallery">
-    <div class="gallery-item">
-      <img src="img/HDR_Capacity_SDR_1280x720.avif" alt="SDR">
-      <div class="caption">SDR</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-1.00.avif" alt="headroom 1.00">
-      <div class="caption">headroom-1.00</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-1.30.avif" alt="headroom 1.30">
-      <div class="caption">headroom-1.30</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-1.50.avif" alt="headroom 1.50">
-      <div class="caption">headroom-1.50</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-1.70.avif" alt="headroom 1.70">
-      <div class="caption">headroom-1.70</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-2.00.avif" alt="headroom 2.00">
-      <div class="caption">headroom-2.00</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-2.30.avif" alt="headroom 2.30">
-      <div class="caption">headroom-2.30</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-2.80.avif" alt="headroom 2.80">
-      <div class="caption">headroom-2.80</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-3.30.avif" alt="headroom 3.30">
-      <div class="caption">headroom-3.30</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-4.00.avif" alt="headroom 4.00">
-      <div class="caption">headroom-4.00</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-5.00.avif" alt="headroom 5.00">
-      <div class="caption">headroom-5.00</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-6.00.avif" alt="headroom 6.00">
-      <div class="caption">headroom-6.00</div>
-    </div>
-    <div class="gallery-item">
-      <img src="img/hdr_capacity_checker_headroom-7.00.avif" alt="headroom 7.00">
-      <div class="caption">headroom-7.00</div>
-    </div>
-  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>HDR Capacity</th>
+        <th>Image</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="param">0.000</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-0.000.avif" alt="headroom 0.000">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">0.563</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-0.563.avif" alt="headroom 0.563">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">0.979</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-0.979.avif" alt="headroom 0.979">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">1.300</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-1.300.avif" alt="headroom 1.300">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">1.563</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-1.563.avif" alt="headroom 1.563">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">1.979</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-1.979.avif" alt="headroom 1.979">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">2.300</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-2.300.avif" alt="headroom 2.300">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">2.563</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-2.563.avif" alt="headroom 2.563">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">2.885</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-2.885.avif" alt="headroom 2.885">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">3.300</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-3.300.avif" alt="headroom 3.300">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">3.622</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-3.622.avif" alt="headroom 3.622">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">3.885</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-3.885.avif" alt="headroom 3.885">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">4.300</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-4.300.avif" alt="headroom 4.300">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">5.622</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-5.622.avif" alt="headroom 5.622">
+        </td>
+      </tr>
+      <tr>
+        <td class="param">6.966</td>
+        <td class="image">
+          <img src="img/hdr_capacity_checker_headroom-6.966.avif" alt="headroom 6.966">
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
 </body>
 </html>
