@@ -7,39 +7,49 @@
   <style>
     body {
       margin: 0;
-      padding: 16px;
+      /* 左右の余白をなくす */
+      padding: 16px 0;
       font-family: sans-serif;
-      background-color: #ffffff;
+      background-color: #f5f5f5;
     }
     h1 {
       text-align: center;
       margin-bottom: 24px;
     }
     table {
-      width: 100%;
+      /* 幅は中身に合わせつつ、余白なしで左端に */
+      width: auto;
       border-collapse: collapse;
-      background: #ffffff;
+      background: #fff;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      table-layout: auto;
+      /* margin をなくして左寄せ */
+      margin: 0;
+    }
+    /* 第一列を狭く固定 */
+    colgroup col:first-child {
+      width: 80px;
     }
     th, td {
-      padding: 12px;
+      padding: 8px;
       border: 1px solid #ddd;
       vertical-align: middle;
       text-align: center;
     }
     th {
-      background-color: #ffffff;
+      background-color: #f0f0f0;
       font-weight: bold;
+      white-space: nowrap;
     }
     td.param {
-      width: 10%;
-      font-size: 0.9rem;
-      color: #333;
-    }    td.image img {
+      white-space: nowrap;
+    }
+    td.image img {
       display: block;
-      max-width: 100%;
+      /* 自然幅の50%で縮小 */
+      width: 90%;
       height: auto;
-      margin: 0 auto;
+      margin: 0;
     }
   </style>
 </head>
@@ -48,9 +58,13 @@
   <h1>HDR Capacity Test</h1>
 
   画面左側の矩形パッチはSDR版は有彩色、HDR版は無彩色となっている。<br>
-  画面に表示される矩形パッチに色がついている場合、それはお使いのモニターの HDR Capacity が不足していることを意味する。
+  画面に表示される矩形パッチに色がついている場合、それはお使いのモニターの HDR Capacity が不足していることを意味する。<br>
 
   <table>
+    <colgroup>
+      <col>
+      <col>
+    </colgroup>
     <thead>
       <tr>
         <th>HDR Capacity</th>
@@ -58,98 +72,24 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="param">SDR</td>
-        <td class="image">
-          <img src="img/HDR_Capacity_SDR_1280x720.avif" alt="SDR">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">0.563</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-0.563.avif" alt="headroom 0.563">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">0.979</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-0.979.avif" alt="headroom 0.979">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">1.300</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-1.300.avif" alt="headroom 1.300">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">1.563</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-1.563.avif" alt="headroom 1.563">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">1.979</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-1.979.avif" alt="headroom 1.979">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">2.300</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-2.300.avif" alt="headroom 2.300">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">2.563</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-2.563.avif" alt="headroom 2.563">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">2.885</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-2.885.avif" alt="headroom 2.885">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">3.300</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-3.300.avif" alt="headroom 3.300">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">3.622</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-3.622.avif" alt="headroom 3.622">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">3.885</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-3.885.avif" alt="headroom 3.885">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">4.300</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-4.300.avif" alt="headroom 4.300">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">5.622</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-5.622.avif" alt="headroom 5.622">
-        </td>
-      </tr>
-      <tr>
-        <td class="param">6.965</td>
-        <td class="image">
-          <img src="img/hdr_capacity_checker_headroom-6.965.avif" alt="headroom 6.965">
-        </td>
-      </tr>
+      <tr><td class="param">SDR</td><td class="image"><img src="img/HDR_Capacity_SDR_1280x720.avif" alt="SDR"></td></tr>
+      <tr><td class="param">0.563</td><td class="image"><img src="img/hdr_capacity_checker_headroom-0.563.avif" alt="0.563"></td></tr>
+      <tr><td class="param">0.979</td><td class="image"><img src="img/hdr_capacity_checker_headroom-0.979.avif" alt="0.979"></td></tr>
+      <tr><td class="param">1.300</td><td class="image"><img src="img/hdr_capacity_checker_headroom-1.300.avif" alt="1.300"></td></tr>
+      <tr><td class="param">1.563</td><td class="image"><img src="img/hdr_capacity_checker_headroom-1.563.avif" alt="1.563"></td></tr>
+      <tr><td class="param">1.979</td><td class="image"><img src="img/hdr_capacity_checker_headroom-1.979.avif" alt="1.979"></td></tr>
+      <tr><td class="param">2.300</td><td class="image"><img src="img/hdr_capacity_checker_headroom-2.300.avif" alt="2.300"></td></tr>
+      <tr><td class="param">2.563</td><td class="image"><img src="img/hdr_capacity_checker_headroom-2.563.avif" alt="2.563"></td></tr>
+      <tr><td class="param">2.885</td><td class="image"><img src="img/hdr_capacity_checker_headroom-2.885.avif" alt="2.885"></td></tr>
+      <tr><td class="param">3.300</td><td class="image"><img src="img/hdr_capacity_checker_headroom-3.300.avif" alt="3.300"></td></tr>
+      <tr><td class="param">3.622</td><td class="image"><img src="img/hdr_capacity_checker_headroom-3.622.avif" alt="3.622"></td></tr>
+      <tr><td class="param">3.885</td><td class="image"><img src="img/hdr_capacity_checker_headroom-3.885.avif" alt="3.885"></td></tr>
+      <tr><td class="param">4.300</td><td class="image"><img src="img/hdr_capacity_checker_headroom-4.300.avif" alt="4.300"></td></tr>
+      <tr><td class="param">5.622</td><td class="image"><img src="img/hdr_capacity_checker_headroom-5.622.avif" alt="5.622"></td></tr>
+      <tr><td class="param">6.965</td><td class="image"><img src="img/hdr_capacity_checker_headroom-6.965.avif" alt="6.965"></td></tr>
     </tbody>
   </table>
 
 </body>
 </html>
+
