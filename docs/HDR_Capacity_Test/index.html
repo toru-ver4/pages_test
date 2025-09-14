@@ -7,7 +7,6 @@
   <style>
     body {
       margin: 0;
-      /* 左右の余白をなくす */
       padding: 16px;
       font-family: sans-serif;
       background-color: #f5f5f5;
@@ -17,22 +16,21 @@
       margin-bottom: 24px;
     }
     p {
-      /* 左端に余白を追加 */
       margin-left: 8px;
       margin-right: 8px;
       line-height: 1.6;
     }
+    .table-wrapper {
+      overflow-x: auto; /* 狭い画面で横スクロール可能に */
+    }
     table {
-      /* 幅は中身に合わせつつ、余白なしで左端に */
       width: auto;
       border-collapse: collapse;
       background: #fff;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       table-layout: auto;
-      /* margin をなくして左寄せ */
       margin: 0;
     }
-    /* 第一列を狭く固定 */
     colgroup col:first-child {
       width: 80px;
     }
@@ -50,13 +48,19 @@
     td.param {
       white-space: nowrap;
     }
+    /* 画像セルの幅を相対的に統一 */
+    td.image,
+    td.ultra-hdr {
+      width: 50vw;       /* 画面幅の50%を基準 */
+      max-width: 640px;  /* 広い画面でも最大640px */
+    }
     td.image img,
     td.ultra-hdr img {
       display: block;
-      /* 自然幅の90%で縮小 */
-      width: 90%;
-      height: auto;
-      margin: 0;
+      width: 100%;       /* セル幅に合わせて可変 */
+      max-width: 100%;
+      height: auto;      /* アスペクト比維持 */
+      margin: 0 auto;
     }
   </style>
 </head>
@@ -69,6 +73,7 @@
     矩形パッチに色がついていない場合、お使いのモニターの HDR Capacity は書かれている数値よりも高い。<br>
     矩形パッチに色がついている場合、お使いのモニターの HDR Capacity は書かれている数値よりも低い。</p>
   
+  <div class="table-wrapper">
   <table>
     <colgroup>
       <col>
@@ -86,7 +91,7 @@
       <tr>
         <td class="param">SDR</td>
         <td class="image"><img src="img/HDR_Capacity_SDR_1280x720.avif" alt="SDR"></td>
-        <td class="ultra-hdr"><img src="img/HDR_Capacity_SDR_1280x720.jpg" alt="SDR Ultra HDR"></td>
+        <td class="ultra-hdr"><img src="img/HDR_Capacity_SDR_1280x720_8bit.jpeg" alt="SDR Ultra HDR"></td>
       </tr>
       <tr>
         <td class="param">0.563</td>
@@ -160,6 +165,7 @@
       </tr>
     </tbody>
   </table>
+  </div>
 
 </body>
 </html>
