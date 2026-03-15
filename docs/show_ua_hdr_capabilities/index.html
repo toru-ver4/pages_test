@@ -32,6 +32,7 @@
 <body>
     <h1>Browser HDR Support Info</h1>
     <p><a href="../index.html">Back to top</a></p>
+    <button type="button" id="download-browser-hdr-info">Download Browser HDR Support Info</button><br>
     <button type="button" id="refresh-browser-hdr-info">Refresh</button>
     <p id="status">Loading...</p>
     <pre id="browser-hdr-info"></pre>
@@ -58,6 +59,19 @@
         }
 
         refreshButton.addEventListener("click", renderBrowserHdrInfo);
+        document
+            .getElementById("download-browser-hdr-info")
+            .addEventListener("click", () => {
+                const script = document.createElement("script");
+                script.src = `../js/dump_browser_info.js?t=${Date.now()}`;
+                script.async = true;
+                document.body.appendChild(script);
+                script.addEventListener("load", () => script.remove(), { once: true });
+                script.addEventListener("error", () => {
+                    script.remove();
+                    console.error("Failed to load ../js/dump_browser_info.js");
+                }, { once: true });
+            });
         renderBrowserHdrInfo();
     </script>
 </body>
