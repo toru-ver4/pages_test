@@ -22,5 +22,26 @@
     <h3>Misc</h3>
     <a href="./JPEG_XL_test/index.html">JPEG XL Test V1</a><br>
     <a href="./AVIF_test/index.html">AVIF Sample</a><br>
+
+    <h3>Utility</h3>
+    <button type="button" id="download-browser-hdr-info">
+        Download Browser HDR Support Info
+    </button>
+
+    <script>
+        document
+            .getElementById("download-browser-hdr-info")
+            .addEventListener("click", () => {
+                const script = document.createElement("script");
+                script.src = `./js/dump_browser_info.js?t=${Date.now()}`;
+                script.async = true;
+                document.body.appendChild(script);
+                script.addEventListener("load", () => script.remove(), { once: true });
+                script.addEventListener("error", () => {
+                    script.remove();
+                    console.error("Failed to load ./js/dump_browser_info.js");
+                }, { once: true });
+            });
+    </script>
 </body>
 </html>
