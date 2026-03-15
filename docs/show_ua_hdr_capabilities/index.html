@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8" />
+    <title>Show Browser HDR Support Info</title>
+    <link rel="stylesheet" href="../ccs/base_page.css">
+    <style>
+        body {
+            margin: 24px;
+            font-family: Consolas, "Courier New", monospace;
+            line-height: 1.5;
+        }
+
+        button {
+            margin-bottom: 16px;
+        }
+
+        #status {
+            margin: 0 0 16px;
+        }
+
+        pre {
+            padding: 16px;
+            overflow: auto;
+            border: 1px solid #ccc;
+            background: #f7f7f7;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+    </style>
+</head>
+<body>
+    <h1>Browser HDR Support Info</h1>
+    <p><a href="../index.html">Back to top</a></p>
+    <button type="button" id="refresh-browser-hdr-info">Refresh</button>
+    <p id="status">Loading...</p>
+    <pre id="browser-hdr-info"></pre>
+
+    <script src="../js/browser_hdr_capabilities.js"></script>
+    <script>
+        const status = document.getElementById("status");
+        const output = document.getElementById("browser-hdr-info");
+        const refreshButton = document.getElementById("refresh-browser-hdr-info");
+
+        async function renderBrowserHdrInfo() {
+            status.textContent = "Loading...";
+            output.textContent = "";
+
+            try {
+                const data = await window.collectBrowserHdrCapabilities();
+                output.textContent = JSON.stringify(data, null, 2);
+                status.textContent = "Loaded.";
+            } catch (error) {
+                status.textContent = "Failed to load browser HDR info.";
+                output.textContent = String(error);
+                console.error(error);
+            }
+        }
+
+        refreshButton.addEventListener("click", renderBrowserHdrInfo);
+        renderBrowserHdrInfo();
+    </script>
+</body>
+</html>
