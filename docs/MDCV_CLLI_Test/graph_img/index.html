@@ -14,8 +14,9 @@
       --muted: #626262;
       --accent: #4a4a4a;
       --accent-soft: #dfdfdf;
-      --header: #e4e4e4;
-      --header-strong: #d0d0d0;
+      --header: #dddddd;
+      --header-strong: #c7c7c7;
+      --header-soft: #f0f0f0;
       --row-alt: #f7f7f7;
       --missing: #6f6f6f;
     }
@@ -91,6 +92,7 @@
     .table-scroll {
       --sticky-top-row-1: 0px;
       --thead-row-1-height: 44px;
+      --thead-row-2-height: 44px;
       position: relative;
       overflow: auto;
       max-height: calc(100vh - 140px);
@@ -119,7 +121,7 @@
     }
 
     thead th {
-      background: var(--header);
+      background: var(--header-soft);
       font-weight: 700;
       position: sticky;
       z-index: 2;
@@ -133,8 +135,24 @@
       z-index: 4;
     }
 
+    thead tr:first-child th[rowspan] {
+      vertical-align: top;
+    }
+
+    thead th.file-format-header {
+      border-left: 1px solid #f7f7f7;
+      border-right: 1px solid #f7f7f7;
+    }
+
     thead tr:nth-child(2) th {
+      background: var(--header);
       top: calc(var(--sticky-top-row-1) + var(--thead-row-1-height));
+      z-index: 4;
+    }
+
+    thead tr:nth-child(3) th {
+      background: var(--header-soft);
+      top: calc(var(--sticky-top-row-1) + var(--thead-row-1-height) + var(--thead-row-2-height));
       z-index: 3;
     }
 
@@ -212,8 +230,14 @@
         <thead>
           <tr>
             <th colspan="6">Metadata</th>
-            <th rowspan="2">File Format</th>
+            <th rowspan="3" class="file-format-header">File Format</th>
             <th colspan="4">Monitor / SDR Content Brightness</th>
+          </tr>
+          <tr>
+            <th colspan="4">MDCV</th>
+            <th colspan="2">CLLI</th>
+            <th colspan="2">BT.709 Primaries, Peak 100 nits</th>
+            <th colspan="2">BT.2020 Primaries, Peak 10000 nits</th>
           </tr>
           <tr>
             <th>Color Primaries</th>
@@ -222,10 +246,10 @@
             <th>Min Luminance</th>
             <th>MaxCLL</th>
             <th>MaxFALL</th>
-            <th>BT.709 / 100 nits<br>SDR 80 nits</th>
-            <th>BT.709 / 100 nits<br>SDR 204 nits</th>
-            <th>BT.2020 / 10000 nits<br>SDR 80 nits</th>
-            <th>BT.2020 / 10000 nits<br>SDR 204 nits</th>
+            <th>80 nits</th>
+            <th>204 nits</th>
+            <th>80 nits</th>
+            <th>204 nits</th>
           </tr>
         </thead>
         <tbody>
@@ -289,8 +313,14 @@
         <thead>
           <tr>
             <th colspan="6">Metadata</th>
-            <th rowspan="2">File Format</th>
+            <th rowspan="3" class="file-format-header">File Format</th>
             <th colspan="4">Monitor / SDR Content Brightness</th>
+          </tr>
+          <tr>
+            <th colspan="4">MDCV</th>
+            <th colspan="2">CLLI</th>
+            <th colspan="2">BT.709 Primaries, Peak 100 nits</th>
+            <th colspan="2">BT.2020 Primaries, Peak 10000 nits</th>
           </tr>
           <tr>
             <th>Color Primaries</th>
@@ -299,10 +329,10 @@
             <th>Min Luminance</th>
             <th>MaxCLL</th>
             <th>MaxFALL</th>
-            <th>BT.709 / 100 nits<br>SDR 80 nits</th>
-            <th>BT.709 / 100 nits<br>SDR 204 nits</th>
-            <th>BT.2020 / 10000 nits<br>SDR 80 nits</th>
-            <th>BT.2020 / 10000 nits<br>SDR 204 nits</th>
+            <th>80 nits</th>
+            <th>204 nits</th>
+            <th>80 nits</th>
+            <th>204 nits</th>
           </tr>
         </thead>
         <tbody>
@@ -364,11 +394,13 @@
     const syncStickyHeaderOffsets = () => {
       document.querySelectorAll('.table-scroll').forEach((container) => {
         const firstHeaderRow = container.querySelector('thead tr:first-child');
-        if (!firstHeaderRow) {
+        const secondHeaderRow = container.querySelector('thead tr:nth-child(2)');
+        if (!firstHeaderRow || !secondHeaderRow) {
           return;
         }
 
         container.style.setProperty('--thead-row-1-height', `${firstHeaderRow.getBoundingClientRect().height}px`);
+        container.style.setProperty('--thead-row-2-height', `${secondHeaderRow.getBoundingClientRect().height}px`);
       });
     };
 
