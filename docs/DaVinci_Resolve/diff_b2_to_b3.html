@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DaVinci Resolve 21 Developer: Beta 2 to Beta 3 Diff Summary</title>
+  <style>
+    :root {
+      --bg: #f6f7f9;
+      --panel: #ffffff;
+      --ink: #1f2933;
+      --muted: #64748b;
+      --line: #d8dee7;
+      --accent: #0f766e;
+      --accent-soft: #e0f2f1;
+      --warn: #a16207;
+      --warn-soft: #fef3c7;
+      --code-bg: #eef2f7;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "BIZ UDPGothic", "Yu Gothic", "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
+      line-height: 1.75;
+    }
+
+    main {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+
+    header {
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      margin: 40px 0 14px;
+      padding-bottom: 8px;
+      border-bottom: 1px solid var(--line);
+      font-size: 1.45rem;
+    }
+
+    h3 {
+      margin: 28px 0 10px;
+      font-size: 1.12rem;
+    }
+
+    p {
+      margin: 0 0 14px;
+    }
+
+    ul {
+      margin: 0 0 16px 1.2em;
+      padding: 0;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    code {
+      padding: 0.12em 0.35em;
+      border-radius: 4px;
+      background: var(--code-bg);
+      font-family: "Cascadia Code", "Consolas", monospace;
+      font-size: 0.92em;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 16px 0 24px;
+      background: var(--panel);
+      font-size: 0.96rem;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #edf2f7;
+      font-weight: 700;
+    }
+
+    .lead {
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.04rem;
+    }
+
+    .card {
+      margin: 18px 0;
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+    }
+
+    .summary-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 22px 0 8px;
+    }
+
+    .metric {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--panel);
+    }
+
+    .metric strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent);
+      font-size: 1.8rem;
+      line-height: 1;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 6px 6px 0;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: var(--accent-soft);
+      color: #115e59;
+      font-size: 0.86rem;
+      font-weight: 700;
+    }
+
+    .note {
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .warning {
+      border-left: 4px solid var(--warn);
+      background: var(--warn-soft);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    @media (max-width: 760px) {
+      main {
+        padding: 28px 14px 48px;
+      }
+
+      .summary-grid {
+        grid-template-columns: 1fr;
+      }
+
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>DaVinci Resolve 21 Developer: Beta 2 → Beta 3 変更まとめ</h1>
+      <p class="lead">対象フォルダは <code>Developer_v21b2</code> と <code>Developer_v21b3</code>。生の diff ではなく、開発者・テンプレート制作者・スクリプト利用者の視点で、何が使えるようになったか、どこに互換性の注意があるかを整理しています。</p>
+    </header>
+
+    <section class="summary-grid" aria-label="差分サマリー">
+      <div class="metric">
+        <strong>0</strong>
+        追加ファイル
+      </div>
+      <div class="metric">
+        <strong>0</strong>
+        削除ファイル
+      </div>
+      <div class="metric">
+        <strong>21</strong>
+        変更ファイル
+      </div>
+    </section>
+
+    <section class="card note">
+      <p><strong>結論:</strong> Beta 3 は大きく分けて、<code>Scripting API</code> に AI / Studio 関連機能が追加され、<code>OGraf HTML Templates</code> の manifest と non-real-time rendering 対応が整理された更新です。既存機能の明示的な削除は確認できませんでしたが、OGraf の <code>duration</code> の置き場所と color pattern は新しい書き方へ移行が必要です。</p>
+    </section>
+
+    <h2>利用者目線の主な変更</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>領域</th>
+          <th>追加・変更されたこと</th>
+          <th>ユーザーができるようになったこと / 注意点</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>Scripting API</code></td>
+          <td>AI / Studio 系 API が追加されました。</td>
+          <td>script から <code>Motion Deblur</code>、<code>IntelliSearch</code>、<code>Slate analysis</code>、<code>Speech Generation</code>、background task の抑制などを呼び出せるようになりました。</td>
+        </tr>
+        <tr>
+          <td><code>OGraf HTML Templates</code></td>
+          <td><code>duration</code> が top-level から <code>v_bmd.duration</code> に移動しました。</td>
+          <td>Blackmagic Design 固有の manifest field として明確化されました。Beta 2 形式の <code>duration</code> を使っている template は Beta 3 形式へ更新した方が安全です。</td>
+        </tr>
+        <tr>
+          <td><code>OGraf Web Component API</code></td>
+          <td><code>setActionsSchedule()</code> と <code>goToTime()</code> の実装方針が強化されました。</td>
+          <td>non-real-time rendering や seek 時に、<code>playAction</code>、<code>stopAction</code>、<code>updateAction</code> を schedule から replay して deterministic な frame を生成しやすくなりました。</td>
+        </tr>
+        <tr>
+          <td><code>OGraf color controls</code></td>
+          <td>color の regex pattern が lowercase only になりました。</td>
+          <td><code>#cc0000</code> のような lowercase hex を前提にした記述へ寄せる必要があります。<code>#CC0000</code> のような uppercase は新しいドキュメント上では非推奨です。</td>
+        </tr>
+        <tr>
+          <td><code>Workflow Integrations</code></td>
+          <td><code>WorkflowIntegration.node</code> binary が更新されました。</td>
+          <td>README / sample script の API 差分は確認できません。binary の内部更新のため、ユーザー向けの具体的な機能追加・削除はこのパッケージだけでは判断できません。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Scripting API の追加</h2>
+    <p>Beta 3 の <code>Scripting/CHANGELOG.txt</code> と <code>Scripting/README.txt</code> では、DaVinci Resolve 21 向けに以下が追加されています。</p>
+
+    <h3>MediaPool / Folder / MediaPoolItem まわり</h3>
+    <ul>
+      <li><code>Folder.RemoveMotionBlur({deblurOption})</code> と <code>MediaPoolItem.RemoveMotionBlur({deblurOption})</code> が追加され、script から <code>Motion Deblur</code> を実行して新しい <code>MediaPoolItem</code> を生成できるようになりました。</li>
+      <li><code>Folder.AnalyzeForIntellisearch(identifyFaces, isBetterMode)</code> と <code>MediaPoolItem.AnalyzeForIntellisearch(identifyFaces, isBetterMode)</code> が追加され、media に対する <code>IntelliSearch</code> analysis を script から開始できるようになりました。</li>
+      <li><code>Folder.AnalyzeForSlate(markerColor)</code> と <code>MediaPoolItem.AnalyzeForSlate(markerColor)</code> が追加され、<code>Slate</code> analysis の結果を指定 color の marker として扱えるようになりました。</li>
+      <li><code>ResetIntellisearchAnalysis()</code> が <code>Project</code> に追加され、project 内の <code>IntelliSearch</code> analysis data を clear できるようになりました。</li>
+    </ul>
+
+    <h3>Speech Generation と background task</h3>
+    <ul>
+      <li><code>Project.GenerateSpeech({speechGenerationSettings}, timecode)</code> が追加され、text から audio を生成し、必要に応じて timeline へ配置できるようになりました。</li>
+      <li><code>Resolve.DisableBackgroundTasksForCurrentResolveSession()</code> が追加され、現在の Resolve session で background task を止められるようになりました。自動処理や検証時に環境を安定させたいケースで有用です。</li>
+    </ul>
+
+    <h3>Studio / AI 機能の前提条件が明文化</h3>
+    <p>Beta 3 では <code>Studio and AI Scripting APIs</code> という説明が追加されました。該当 API は Free 版では失敗する場合があり、必要な <code>Extras</code> package が未インストールの場合も <code>False</code> や error status になることがあります。</p>
+    <div class="card warning">
+      <p><strong>実装時の注意:</strong> <code>AnalyzeForIntellisearch</code>、<code>AnalyzeForSlate</code>、extended language model を使う transcription、<code>GenerateSpeech</code> などは、Resolve Studio と必要な Extras の有無を前提に error handling するべきです。</p>
+    </div>
+
+    <h2>OGraf HTML Templates の変更</h2>
+    <h3>Manifest の <code>duration</code> が <code>v_bmd.duration</code> へ移動</h3>
+    <p>Beta 2 では top-level に書いていた <code>duration</code> が、Beta 3 では <code>v_bmd</code> object の中に移動しました。</p>
+    <div class="card">
+      <p><span class="tag">Beta 2</span> <code>"duration": 5</code></p>
+      <p><span class="tag">Beta 3</span> <code>"v_bmd": { "duration": 5 }</code></p>
+    </div>
+    <p>これにより、OGraf 標準の field と Blackmagic Design 固有 field の境界が明確になりました。既存 template を Beta 3 に合わせる場合、manifest の移行が最優先です。</p>
+
+    <h3>Non-real-time rendering の実装がより堅牢に</h3>
+    <p><code>03-Web-Component-API.md</code> と example の <code>Breaking-News.js</code> / <code>Sport-Match-Result.js</code> では、<code>goToTime()</code> の実装が大きく更新されています。</p>
+    <ul>
+      <li><code>load()</code> で初期データを <code>_initialData</code> として保持するようになりました。</li>
+      <li><code>setActionsSchedule(payload)</code> で schedule を保持し、<code>goToTime(payload)</code> で指定 timestamp までの action を replay する設計になりました。</li>
+      <li><code>updateAction()</code> の変更を <code>_initialData</code> に同期し、seek や frame-by-frame rendering で編集済み property が巻き戻らないようになりました。</li>
+      <li><code>stopAction()</code> は <code>_currentStep = 0</code> として hidden state を表すようになりました。</li>
+    </ul>
+    <p>利用者側の効果としては、timeline 上で scrub / render したときの表示が安定し、operator が変更した text や color が non-real-time render で失われにくくなります。</p>
+
+    <h3>Color property の扱い</h3>
+    <p>color picker 用の <code>gddType</code> は継続ですが、pattern は <code>^#[0-9a-f]{6}$</code> または <code>^#[0-9a-f]{8}$</code> のように lowercase only と説明されています。</p>
+    <p>Beta 2 の <code>^#[0-9a-fA-F]{6}$</code> を使っている template は、Beta 3 のサンプルに合わせて lowercase に寄せるのが無難です。</p>
+
+    <h3>Install path の説明が修正・拡充</h3>
+    <p>OGraf template の install path は、per-user と system-wide に分けて説明されるようになりました。特に Windows の per-user path は <code>%APPDATA%\Blackmagic Design\DaVinci Resolve\Support\Fusion\Templates\Edit\Titles\...</code> と明記されています。</p>
+
+    <h2>削除・非互換の可能性</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>項目</th>
+          <th>確認結果</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>ファイルの追加・削除</td>
+          <td>追加ファイル・削除ファイルはありません。既存ファイルの更新のみです。</td>
+        </tr>
+        <tr>
+          <td><code>Scripting API</code> の削除</td>
+          <td>削除された API は確認できません。Beta 3 は追加と前提条件の明文化が中心です。</td>
+        </tr>
+        <tr>
+          <td><code>OGraf duration</code></td>
+          <td>top-level <code>duration</code> はサンプルとドキュメントから消え、<code>v_bmd.duration</code> に置き換わりました。古い manifest が引き続き動くかは、このドキュメント差分だけでは断定できません。</td>
+        </tr>
+        <tr>
+          <td>uppercase hex color</td>
+          <td>ドキュメント上の pattern は lowercase only になりました。uppercase hex を出力する tooling は修正対象です。</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>変更された主なファイル</h2>
+    <p class="muted">以下は実際に内容変更があった領域の要約です。</p>
+    <ul>
+      <li><code>Scripting/CHANGELOG.txt</code>: 21.0 の追加 API が追記されました。</li>
+      <li><code>Scripting/README.txt</code>: 新 API、AI / Studio prerequisites、<code>Motion Deblur Settings</code>、<code>Analyze Slate Settings</code>、<code>Speech Generation Settings</code> が追加されました。</li>
+      <li><code>OGraf HTML Templates/Documentation/*.md</code>: <code>v_bmd.duration</code>、schedule replay、color pattern、install path の説明が更新されました。</li>
+      <li><code>OGraf HTML Templates/Examples/*/*.js</code>: <code>goToTime()</code>、<code>setActionsSchedule()</code>、<code>updateAction()</code>、hidden state の実装が更新されました。</li>
+      <li><code>OGraf HTML Templates/Examples/*/*.ograf.json</code> と <code>Templates/Manifest-Template.ograf.json</code>: <code>duration</code> が <code>v_bmd.duration</code> へ移動し、color pattern が lowercase only になりました。</li>
+      <li><code>Workflow Integrations/Examples/*/WorkflowIntegration.node</code>: binary が更新されましたが、対応する README / script の説明変更はありません。</li>
+    </ul>
+  </main>
+</body>
+</html>
